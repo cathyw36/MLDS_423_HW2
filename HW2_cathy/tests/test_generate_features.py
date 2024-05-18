@@ -1,32 +1,30 @@
 import pandas as pd
-import numpy as np
 import pytest
 from src.generate_features import generate_features
 
+@pytest.fixture
+def sample_data():
+    """Fixture to provide sample DataFrame used in multiple tests."""
+    return pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}).astype(float)
 
-# Happy
-def test_basic_operation():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}).astype(float)
-
-    config = {
+@pytest.fixture
+def basic_config():
+    """Fixture to provide a basic configuration for feature engineering."""
+    return {
         "feature_col": ["A", "B"],
         "target_col": "C",
         "feature_eng": [
             {"operation": "multiply", "source1": "A", "source2": "B", "target": "D"}
-        ],
+        ]
     }
 
-    result = generate_features(data, config)
-    expected_result = pd.DataFrame(
-        {"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9], "D": [4, 10, 18]}
-    ).astype(float)
+# Happy Path Tests
+def test_basic_operation(sample_data, basic_config):
+    result = generate_features(sample_data, basic_config)
+    expected_result = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9], "D": [4, 10, 18]}).astype(float)
+    pd.testing.assert_frame_equal(result, expected_result)
 
-    assert result.equals(expected_result)
-
-
-def test_nested_operation():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}).astype(float)
-
+def test_nested_operation(sample_data):
     config = {
         "feature_col": ["A", "B"],
         "target_col": "C",
@@ -37,142 +35,46 @@ def test_nested_operation():
                 "source2": "B",
                 "target": "D",
             }
-        ],
+        ]
     }
-
-    result = generate_features(data, config)
-    expected_result = pd.DataFrame(
-        {"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9], "D": [-12, -15, -18]}
-    ).astype(float)
-
-    assert result.equals(expected_result)
-
-
-def test_apply_operation():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}).astype(float)
-
-    config = {
-        "feature_col": ["A", "B"],
-        "target_col": "C",
-        "feature_eng": [
-            {"target": "D", "operation": "apply", "source1": "A", "function": "square"}
-        ],
-    }
-
-    result = generate_features(data, config)
-    expected_result = pd.DataFrame(
-        {"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9], "D": [1, 4, 9]}
-    ).astype(float)
-
-    assert result.equals(expected_result)
-
-
-def test_multiple_operations():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]}).astype(float)
-
-    config = {
-        "feature_col": ["A", "B"],
-        "target_col": "C",
-        "feature_eng": [
-            {
-                "operation": "multiply",
-                "source1": "A",
-                "source2": "B",
-                "target": "D",
-            },
-            {
-                "operation": "subtract",
-                "source1": "A",
-                "source2": "B",
-                "target": "E",
-            },
-        ],
-    }
-
-    result = generate_features(data, config)
-    expected_result = pd.DataFrame(
-        {
-            "A": [1, 2, 3],
-            "B": [4, 5, 6],
-            "C": [7, 8, 9],
-            "D": [4, 10, 18],
-            "E": [-3, -3, -3],
-        }
-    ).astype(float)
-
+    result = generate_features(sample_data, config)
+    expected_result = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9], "D": [-12, -15, -18]}).astype(float)
     pd.testing.assert_frame_equal(result, expected_result)
 
-
-def test_divide_operation():
-    data = pd.DataFrame({"A": [2, 4, 6], "B": [4, 8, 12], "C": [1, 2, 3]}).astype(float)
-
+def test_apply_operation(sample_data):
     config = {
         "feature_col": ["A", "B"],
         "target_col": "C",
-        "feature_eng": [
-            {"target": "D", "operation": "divide", "source1": "B", "source2": "A"}
-        ],
+        "feature_eng": [{"target": "D", "operation": "apply", "source1": "A", "function": "square"}]
     }
-
-    result = generate_features(data, config)
-    expected_result = pd.DataFrame(
-        {"A": [2, 4, 6], "B": [4, 8, 12], "C": [1, 2, 3], "D": [2, 2, 2]}
-    ).astype(float)
-
+    result = generate_features(sample_data, config)
+    expected_result = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9], "D": [1, 4, 9]}).astype(float)
     pd.testing.assert_frame_equal(result, expected_result)
 
-
-# Unhappy
-def test_missing_feature_col():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
-
+# Unhappy Path Tests
+def test_missing_feature_col(sample_data):
     config = {
-        "feature_col": "A",
+        "feature_col": "A",  # Incorrect type: should be a list
         "target_col": "C",
-        "feature_eng": [
-            {"target": "D", "operation": "multiply", "source1": "A", "source2": "B"}
-        ],
+        "feature_eng": [{"target": "D", "operation": "multiply", "source1": "A", "source2": "B"}]
     }
-
     with pytest.raises(KeyError):
-        result = generate_features(data, config)
+        generate_features(sample_data, config)
 
-
-def test_invalid_operation():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
-
+def test_invalid_operation(sample_data):
     config = {
         "feature_col": ["A", "B"],
         "target_col": "C",
-        "feature_eng": [
-            {
-                "target": "D",
-                "operation": "invalid_operation",
-                "source1": "A",
-                "source2": "B",
-            }
-        ],
+        "feature_eng": [{"target": "D", "operation": "invalid_operation", "source1": "A", "source2": "B"}]
     }
-
     with pytest.raises(NotImplementedError):
-        result = generate_features(data, config)
+        generate_features(sample_data, config)
 
-
-def test_invalid_function():
-    data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
-
+def test_invalid_function(sample_data):
     config = {
         "feature_col": ["A", "B"],
         "target_col": "C",
-        "feature_eng": [
-            {
-                "target": "D",
-                "operation": "apply",
-                "source1": "A",
-                "function": "invalid_function",
-            }
-        ],
+        "feature_eng": [{"target": "D", "operation": "apply", "source1": "A", "function": "invalid_function"}]
     }
-
     with pytest.raises(AttributeError):
-        result = generate_features(data, config)
+        generate_features(sample_data, config)

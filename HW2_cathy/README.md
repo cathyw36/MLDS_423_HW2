@@ -1,182 +1,232 @@
-# Clouds
-
-## Overview
-
-This repository contains a modularized data science model pipeline. It is a flexible and extensible framework designed to streamline the process of the machine learning workflow, including data acquisition, feature engineering, model selection, training, evaluation, and deployment. The pipeline is organized into distinct, reusable components that can be easily modified or replaced to meet the specific needs of a wide range of machine learning tasks.
-
-## Table of Contents
-
-- [Clouds](#clouds)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-    - [1. Clone the repository](#1-clone-the-repository)
-    - [2. Change directory into repository folder](#2-change-directory-into-repository-folder)
-    - [3. Setup AWS credentials for artifact upload to S3](#3-setup-aws-credentials-for-artifact-upload-to-s3)
-    - [4. Install required packages (required for local implementation)](#4-install-required-packages-required-for-local-implementation)
-  - [Usage](#usage)
-    - [1. Local](#1-local)
-      - [Pipeline only](#pipeline-only)
-      - [Unit Test](#unit-test)
-    - [2. Docker](#2-docker)
-      - [Pipeline only](#pipeline-only-1)
-        - [Build the Docker image](#build-the-docker-image)
-        - [Run the entire model pipeline](#run-the-entire-model-pipeline)
-      - [Unit Test](#unit-test-1)
-        - [Build the Docker image for unit test](#build-the-docker-image-for-unit-test)
-        - [Run the tests](#run-the-tests)
-  - [Customization](#customization)
-    - [Acquire data](#acquire-data)
-    - [Create dataset](#create-dataset)
-    - [Generate features](#generate-features)
-    - [Analysis](#analysis)
-    - [Train model](#train-model)
-    - [Score model](#score-model)
-    - [Evaluate performance](#evaluate-performance)
-    - [AWS](#aws)
 
 
+# Cloud Models
 
-## Features
-- Modularity: The pipeline is designed with independent modules for data processing, feature engineering, model training, evaluation, deployment, and artifact saving.
-- Flexibility: Each module can be easily customized to accommodate specific requirements or preferences using [config.yaml](config/config.yaml).
-- Compatibility: Supports a wide variety of machine learning models and libraries, including TensorFlow, PyTorch, and scikit-learn. 
-- Reproducibility: The entire pipeline and its unit tests can be run inside a docker container.
+## Introduction
 
-## Requirements
-- Python 3.7 or higher
-- See [requirements.txt](requirements.txt).
+Welcome to the Cloud Models repository. This project encapsulates a structured and modularized approach to the machine learning development cycle, designed for ease of use and adaptability. The framework includes modules for each key step of the process, from initial data gathering and processing to the final stages of model evaluation and deployment.
 
-## Installation
+## Contents
 
-### 1. Clone the repository
+- [Cloud Models](#cloud-models)
+  - [Introduction](#introduction)
+  - [Contents](#contents)
+  - [Key Features](#key-features)
+  - [Prerequisites](#prerequisites)
+  - [Getting Started](#getting-started)
+    - [Repository Cloning](#repository-cloning)
+    - [Navigating to the Repository](#navigating-to-the-repository)
+    - [Configuring AWS for S3 Uploads](#configuring-aws-for-s3-uploads)
+    - [Dependencies Installation](#dependencies-installation)
+  - [Adjustments and Enhancements of config file](#adjustments-and-enhancements)
+    - [Data Collection Adjustments](#data-collection-adjustments)
+    - [Dataset Configuration](#dataset-configuration)
+    - [Feature Configuration](#feature-configuration)
+    - [Analytical Adjustments](#analytical-adjustments)
+    - [Model Training Adjustments](#model-training-adjustments)
+    - [Model Scoring Adjustments](#model-scoring-adjustments)
+    - [Performance Evaluation Adjustments](#performance-evaluation-adjustments)
+    - [AWS Configuration](#aws-configuration)
+  - [Operational Guide](#operational-guide)
+    - [Execution Locally](#execution-locally)
+      - [Running the Pipeline](#running-the-pipeline)
+      - [Executing Unit Tests](#executing-unit-tests)
+    - [Using Docker](#using-docker)
+      - [Pipeline Execution](#pipeline-execution)
+        - [Docker Image Construction](#docker-image-construction)
+        - [Launching the Pipeline](#launching-the-pipeline)
+      - [Testing with Docker](#testing-with-docker)
+        - [Constructing the Docker Image for Testing](#constructing-the-docker-image-for-testing)
+        - [Initiating the Tests](#initiating-the-tests)
+  
 
-```bash
-git clone https://github.com/MSIA/2023-423-hwl6390-hw2.git
-```
+## Key Features
 
-### 2. Change directory into repository folder
+- **Modularity:** The structure is built with self-contained modules for each phase of the machine learning pipeline.
+- **Customizability:** Easy adjustments are possible through the [config.yaml](config/config.yaml) to meet specific requirements.
+- **Broad Compatibility:** Supports various libraries such as TensorFlow, PyTorch, and scikit-learn.
+- **Reproducibility:** Ensures consistent results through Docker encapsulation.
+
+## Prerequisites
+
+- Python 3.7+
+- Dependencies listed in [requirements.txt](requirements.txt).
+
+## Getting Started
+
+### Repository Cloning
 
 ```bash
-cd 2023-423-hwl6390-hw2
+git clone https://github.com/cathyw36/MLDS_423_HW2.git
 ```
 
-### 3. Setup AWS credentials for artifact upload to S3
-
-This guide assumes you have installed the `AWS` CLI. If you have not configured an AWS profile, run the following
+### Navigating to the Repository
 
 ```bash
-aws configure sso --profile my-sso
+cd HW2_Cathy
 ```
-For the purposes of this guide, the name of the AWS profile will be `my-sso`. The user can name it however they like.
 
-After configuring the sso, run the following to login
+### Configuring AWS for S3 Uploads
 
+Ensure the `AWS CLI` is installed. Configure your AWS profile as follows:
+During the configure, you need to get your key from AWS IAM serives, with ID and Secret Key
 ```bash
-aws sso login --profile my-sso
+aws configure 
 ```
 
-After logging in, export the profile as an environment variable
-
-```bash
-export AWS_PROFILE=my-sso
-```
-
-If you run `aws configure list` and are able to see `my-sso` in the list of profiles, the environment variable has been set correctly.
-
-### 4. Install required packages (required for local implementation)
+### Dependencies Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+## Adjustments and Enhancements of config
 
-### 1. Local
+This section outlines how you can customize and enhance various components of the cloud classification pipeline according to your specific needs. Each sub-section corresponds to key areas in the `config.yaml` file that can be modified for different use cases.
 
-#### Pipeline only
+### Data Collection Adjustments
 
-Verify you are in the same directory as `pipeline.py`. Then, run
+To adapt the data collection process to your needs, modify the `run_config` section. Here, you can change the data source or the output directory structure as required:
+
+```yaml
+run_config:
+  data_source: "https://newsource.com/newdata"
+  data_dir:
+    raw: new_data/raw
+    processed: new_data/processed
+```
+
+### Dataset Configuration
+
+Adjust the dataset creation parameters in the `create_dataset` section to suit different data formats or preprocessing needs:
+
+```yaml
+create_dataset:
+  date_config:
+    date_format: "%d-%m-%Y"  # Adjust date formats as per new requirements
+  data_prep:
+    first_cloud:
+      left: 50  # Adjust indices for new data structure
+      right: 1100
+```
+
+### Feature Engineering
+
+Modify the `generate_features` section to introduce new features, adjust existing feature calculations, or redefine the target variable for classification:
+
+```yaml
+generate_features:
+  feature_col:
+    - new_feature1
+    - new_feature2
+  feature_eng:
+    - operation: new_operation
+      source1: new_feature1
+      source2: new_feature2
+      target: new_feature3
+```
+
+### Matplotlib Configuration
+
+Tweak `mpl_config` for aesthetic adjustments or to accommodate different visualization requirements:
+
+```yaml
+mpl_config:
+  font.size: 18
+  axes.labelsize: 22
+  figure.figsize: [14.0, 10.0]
+```
+
+### Model Training Adjustments
+
+Customize the `train_model` section to change the machine learning model, adjust hyperparameters, or modify the train-test split:
+
+```yaml
+train_model:
+  model_config:
+    type: NewModelType
+    hyperparam:
+      new_param1: value1
+      new_param2: value2
+```
+
+### Model Scoring and Evaluation
+
+Update the `score_model` and `evaluate_performance` sections to alter scoring metrics or the way model performance is evaluated:
+
+```yaml
+score_model:
+  initial_features:
+    - adjusted_feature1
+    - adjusted_feature2
+
+evaluate_performance:
+  metrics:
+    - new_metric1
+    - new_metric2
+```
+
+### AWS Configuration
+
+If using AWS for deployments or data handling, adjust the `aws` settings to change the storage bucket or manage permissions:
+
+```yaml
+aws:
+  bucket_name: new-bucket-name
+  prefix: new-prefix/
+```
+
+Each of these adjustments allows you to optimize the pipeline for different datasets, operational environments, or project requirements, ensuring flexibility and scalability of your machine learning operations.
+
+
+
+## Operational Guide
+
+### Execution Locally
+
+#### Running the Pipeline
+
+Ensure you are in the same directory as `pipeline.py` and execute:
 
 ```bash
 python pipeline.py
 ```
-in the terminal.
 
-#### Unit Test
+#### Executing Unit Tests
 
-Run
+Run the tests using:
 
 ```bash
 pytest
 ```
-in the terminal
 
-### 2. Docker
+### Using Docker
 
-#### Pipeline only
+#### Pipeline Execution
 
-##### Build the Docker image
+##### Docker Image Construction
 
 ```bash
 docker build -t pipeline -f dockerfiles/dockerfile-pipeline .
 ```
 
-##### Run the entire model pipeline
+##### Launching the Pipeline
 
 ```bash
 docker run -v ~/.aws:/root/.aws -e AWS_PROFILE=my-sso pipeline
 ```
 
-#### Unit Test
+#### Testing with Docker
 
-##### Build the Docker image for unit test
+##### Constructing the Docker Image for Testing
 
 ```bash
 docker build -t unittest-pipeline -f dockerfiles/dockerfile-test .
 ```
 
-##### Run the tests
+##### Initiating the Tests
 
 ```bash
 docker run unittest-pipeline
 ```
-
-## Customization
-
-To customize settings within the pipeline, edit [config.yaml](config/config.yaml).
-
-### Acquire data
-
-Modify `run_config` section in `config.yaml` to achieve desired dataset and output locations.
-
-### Create dataset
-
-Modify `create_dataset` section in `config.yaml` to achieve desired dataset characteristics and output locations.
-
-### Generate features
-
-Modify `generate_features` section in `config.yaml` to achieve desired features and operations to achieve those features.
-
-### Analysis
-
-Modify `mpl_config` and `eda` sections in `config.yaml` to adjust matplotlib settings, create desired visualizations. Set desired save locations using `figure_dir` in `run_config` section of `config.yaml`.
-
-### Train model
-
-Modify `train_model` section of `config.yaml` to adjust train test split, features, model configuration, hyperparameters, and directory to save model artifacts.
-
-### Score model
-
-Modify `score_model` section of `config.yaml` to adjust settings for model output.
-
-### Evaluate performance
-
-Modify `evaluate_performance` section of `config.yaml` to adjust metrics used for evaluating model performance.
-
-### AWS
-
-Modify `aws` section of `config.yaml` to achieve desired bucket name and prefixes.
 

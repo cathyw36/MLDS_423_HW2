@@ -1,0 +1,88 @@
+05/17/2024 06:00:30 PM pipeline - INFO     Logging is configured.
+05/17/2024 06:00:31 PM acquire_data - INFO     Data successfully written to artifacts\run_20240517_180030\data\raw\clouds.data
+05/17/2024 06:00:31 PM create_dataset - INFO     Clean dataset created
+05/17/2024 06:00:31 PM create_dataset - INFO     Saved dataset to artifacts\run_20240517_180030\data\processed\clouds.csv
+05/17/2024 06:00:31 PM generate_features - INFO     Feature log_entropy created.
+05/17/2024 06:00:31 PM generate_features - INFO     Feature entropy_x_contrast created.
+05/17/2024 06:00:31 PM generate_features - INFO     Feature IR_range created.
+05/17/2024 06:00:31 PM generate_features - INFO     Feature IR_norm_range created.
+05/17/2024 06:00:31 PM analysis - INFO     Figure visible_mean_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_mean_eda_plot.png
+05/17/2024 06:00:31 PM analysis - INFO     Figure visible_max_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_max_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure visible_min_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_min_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure visible_mean_distribution_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_mean_distribution_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure visible_contrast_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_contrast_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure visible_entropy_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_entropy_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure visible_second_angular_momentum_eda_plot.png saved at artifacts\run_20240517_180030\figures\visible_second_angular_momentum_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure IR_mean_eda_plot.png saved at artifacts\run_20240517_180030\figures\IR_mean_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure IR_max_eda_plot.png saved at artifacts\run_20240517_180030\figures\IR_max_eda_plot.png
+05/17/2024 06:00:32 PM analysis - INFO     Figure IR_min_eda_plot.png saved at artifacts\run_20240517_180030\figures\IR_min_eda_plot.png
+05/17/2024 06:00:33 PM train_model - INFO     Model successfully trained
+05/17/2024 06:00:33 PM train_model - INFO     Train dataset successfully saved to artifacts\run_20240517_180030\data_for_model\train.csv
+05/17/2024 06:00:33 PM train_model - INFO     Test dataset successfully saved to artifacts\run_20240517_180030\data_for_model\test.csv
+05/17/2024 06:00:33 PM train_model - INFO     Model binary successfully saved to artifacts\run_20240517_180030\model_artifacts\trained_model_object.pkl
+05/17/2024 06:00:33 PM score_model - INFO     Model predictions (probability and class) created.
+05/17/2024 06:00:33 PM score_model - INFO     Model predictions saved to artifacts\run_20240517_180030\model_output\scores.csv
+05/17/2024 06:00:33 PM evaluate_performance - INFO     Dic with metrics created
+05/17/2024 06:00:33 PM evaluate_performance - INFO     Metrics yaml file created at artifacts\run_20240517_180030\performance\metrics.yaml
+05/17/2024 06:00:33 PM aws_utils - INFO     Bucket 'xxxxx3' verified.
+05/17/2024 06:00:33 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\data\processed\clouds.csv' to 's3://xxxxx3/artifacts/data/processed/clouds.csv'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\data\raw\clouds.data' to 's3://xxxxx3/artifacts/data/raw/clouds.data'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\data_for_model\test.csv' to 's3://xxxxx3/artifacts/data_for_model/test.csv'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\data_for_model\train.csv' to 's3://xxxxx3/artifacts/data_for_model/train.csv'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\IR_max_eda_plot.png' to 's3://xxxxx3/artifacts/figures/IR_max_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\IR_mean_eda_plot.png' to 's3://xxxxx3/artifacts/figures/IR_mean_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\IR_min_eda_plot.png' to 's3://xxxxx3/artifacts/figures/IR_min_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_contrast_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_contrast_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_entropy_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_entropy_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_max_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_max_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_mean_distribution_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_mean_distribution_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_mean_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_mean_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_min_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_min_eda_plot.png'.
+05/17/2024 06:00:34 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\figures\visible_second_angular_momentum_eda_plot.png' to 's3://xxxxx3/artifacts/figures/visible_second_angular_momentum_eda_plot.png'.
+05/17/2024 06:00:35 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\model_artifacts\trained_model_object.pkl' to 's3://xxxxx3/artifacts/model_artifacts/trained_model_object.pkl'.
+05/17/2024 06:00:35 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\model_output\scores.csv' to 's3://xxxxx3/artifacts/model_output/scores.csv'.
+05/17/2024 06:00:35 PM aws_utils - INFO     Successfully uploaded 'artifacts\run_20240517_180030\performance\metrics.yaml' to 's3://xxxxx3/artifacts/performance/metrics.yaml'.
+05/17/2024 07:05:58 PM pipeline - INFO     Logging is configured.
+05/17/2024 07:06:00 PM acquire_data - INFO     Data successfully written to artifacts/run_20240517_190558/data/raw/clouds.data
+05/17/2024 07:06:00 PM create_dataset - INFO     Clean dataset created
+05/17/2024 07:06:00 PM create_dataset - INFO     Saved dataset to artifacts/run_20240517_190558/data/processed/clouds.csv
+05/17/2024 07:06:00 PM generate_features - INFO     Feature log_entropy created.
+05/17/2024 07:06:00 PM generate_features - INFO     Feature entropy_x_contrast created.
+05/17/2024 07:06:00 PM generate_features - INFO     Feature IR_range created.
+05/17/2024 07:06:00 PM generate_features - INFO     Feature IR_norm_range created.
+05/17/2024 07:06:01 PM analysis - INFO     Figure visible_mean_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_mean_eda_plot.png
+05/17/2024 07:06:01 PM analysis - INFO     Figure visible_max_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_max_eda_plot.png
+05/17/2024 07:06:01 PM analysis - INFO     Figure visible_min_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_min_eda_plot.png
+05/17/2024 07:06:01 PM analysis - INFO     Figure visible_mean_distribution_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_mean_distribution_eda_plot.png
+05/17/2024 07:06:01 PM analysis - INFO     Figure visible_contrast_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_contrast_eda_plot.png
+05/17/2024 07:06:02 PM analysis - INFO     Figure visible_entropy_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_entropy_eda_plot.png
+05/17/2024 07:06:02 PM analysis - INFO     Figure visible_second_angular_momentum_eda_plot.png saved at artifacts/run_20240517_190558/figures/visible_second_angular_momentum_eda_plot.png
+05/17/2024 07:06:02 PM analysis - INFO     Figure IR_mean_eda_plot.png saved at artifacts/run_20240517_190558/figures/IR_mean_eda_plot.png
+05/17/2024 07:06:02 PM analysis - INFO     Figure IR_max_eda_plot.png saved at artifacts/run_20240517_190558/figures/IR_max_eda_plot.png
+05/17/2024 07:06:02 PM analysis - INFO     Figure IR_min_eda_plot.png saved at artifacts/run_20240517_190558/figures/IR_min_eda_plot.png
+05/17/2024 07:06:03 PM train_model - INFO     Model successfully trained
+05/17/2024 07:06:03 PM train_model - INFO     Train dataset successfully saved to artifacts/run_20240517_190558/data_for_model/train.csv
+05/17/2024 07:06:03 PM train_model - INFO     Test dataset successfully saved to artifacts/run_20240517_190558/data_for_model/test.csv
+05/17/2024 07:06:03 PM train_model - INFO     Model binary successfully saved to artifacts/run_20240517_190558/model_artifacts/trained_model_object.pkl
+05/17/2024 07:06:03 PM score_model - INFO     Model predictions (probability and class) created.
+05/17/2024 07:06:03 PM score_model - INFO     Model predictions saved to artifacts/run_20240517_190558/model_output/scores.csv
+05/17/2024 07:06:03 PM evaluate_performance - INFO     Dic with metrics created
+05/17/2024 07:06:03 PM evaluate_performance - INFO     Metrics yaml file created at artifacts/run_20240517_190558/performance/metrics.yaml
+05/17/2024 07:06:04 PM aws_utils - INFO     Bucket 'mlds423-hw3' verified.
+05/17/2024 07:06:05 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/model_artifacts/trained_model_object.pkl' to 's3://mlds423-hw3/artifacts/model_artifacts/trained_model_object.pkl'.
+05/17/2024 07:06:05 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/model_output/scores.csv' to 's3://mlds423-hw3/artifacts/model_output/scores.csv'.
+05/17/2024 07:06:05 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/IR_mean_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/IR_mean_eda_plot.png'.
+05/17/2024 07:06:06 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_mean_distribution_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_mean_distribution_eda_plot.png'.
+05/17/2024 07:06:06 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_entropy_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_entropy_eda_plot.png'.
+05/17/2024 07:06:06 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_contrast_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_contrast_eda_plot.png'.
+05/17/2024 07:06:07 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/IR_min_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/IR_min_eda_plot.png'.
+05/17/2024 07:06:07 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_mean_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_mean_eda_plot.png'.
+05/17/2024 07:06:07 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/IR_max_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/IR_max_eda_plot.png'.
+05/17/2024 07:06:08 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_max_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_max_eda_plot.png'.
+05/17/2024 07:06:08 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_second_angular_momentum_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_second_angular_momentum_eda_plot.png'.
+05/17/2024 07:06:08 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/figures/visible_min_eda_plot.png' to 's3://mlds423-hw3/artifacts/figures/visible_min_eda_plot.png'.
+05/17/2024 07:06:09 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/data_for_model/test.csv' to 's3://mlds423-hw3/artifacts/data_for_model/test.csv'.
+05/17/2024 07:06:09 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/data_for_model/train.csv' to 's3://mlds423-hw3/artifacts/data_for_model/train.csv'.
+05/17/2024 07:06:10 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/performance/metrics.yaml' to 's3://mlds423-hw3/artifacts/performance/metrics.yaml'.
+05/17/2024 07:06:11 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/data/processed/clouds.csv' to 's3://mlds423-hw3/artifacts/data/processed/clouds.csv'.
+05/17/2024 07:06:14 PM aws_utils - INFO     Successfully uploaded 'artifacts/run_20240517_190558/data/raw/clouds.data' to 's3://mlds423-hw3/artifacts/data/raw/clouds.data'.

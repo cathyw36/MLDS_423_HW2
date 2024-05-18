@@ -12,27 +12,14 @@ run_config:
     processed: data/processed
   figure_dir: figures
   
-mpl_config:
-  font.size: 16
-  axes.prop_cycle: 'color'
-  axes.prop_cycle_colors: 
-    - '#0085ca'
-    - '#888b8d'
-    - '#00c389'
-    - '#f4364c'
-    - '#e56db1'
-  xtick.labelsize: 14
-  ytick.labelsize: 14
-  figure.figsize: [12.0, 8.0]
-  axes.labelsize: 20
-  axes.labelcolor: '#677385'
-  axes.titlesize: 20
-  lines.color: '#0055A7'
-  lines.linewidth: 3
-  text.color: '#677385'
-  font.family: sans-serif
-  font.sans-serif: Tahoma
-
+score_model:
+  target: class
+  initial_features: 
+      - log_entropy
+      - IR_norm_range
+      - entropy_x_contrast
+  score_dir: model_output
+  
 create_dataset:
   date_config:
     date_format: "%Y-%m-%d"
@@ -62,6 +49,27 @@ create_dataset:
       right: 2105
       remove: '/n'
       replace: ""
+      
+mpl_config:
+  font.size: 16
+  axes.prop_cycle: 'color'
+  axes.prop_cycle_colors: 
+    - '#0085ca'
+    - '#888b8d'
+    - '#00c389'
+    - '#f4364c'
+    - '#e56db1'
+  xtick.labelsize: 14
+  ytick.labelsize: 14
+  figure.figsize: [12.0, 8.0]
+  axes.labelsize: 20
+  axes.labelcolor: '#677385'
+  axes.titlesize: 20
+  lines.color: '#0055A7'
+  lines.linewidth: 3
+  text.color: '#677385'
+  font.family: sans-serif
+  font.sans-serif: Tahoma
 
 generate_features:
   feature_col: 
@@ -122,13 +130,7 @@ train_model:
       n_estimators: 10
       max_depth: 10
 
-score_model:
-  target: class
-  initial_features: 
-      - log_entropy
-      - IR_norm_range
-      - entropy_x_contrast
-  score_dir: model_output
+
 
 evaluate_performance:
   metric_dir: performance

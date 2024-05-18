@@ -18,9 +18,7 @@ def check_bucket_exists(bucket_name: str, s3_client):
         NotImplementedError: If bucket does not exist or other S3 errors occur.
     """
     try:
-        print(bucket_name)
         s3_client.head_bucket(Bucket=bucket_name)
-        print(bucket_name)
         logger.info("Bucket '%s' verified.", bucket_name)
     except Exception as e:
         error_code = e.response['Error']['Code']
